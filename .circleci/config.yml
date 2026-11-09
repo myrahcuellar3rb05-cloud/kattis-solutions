@@ -1,0 +1,1238 @@
+version: 2.1
+
+jobs:
+  v14x:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Snapshot cache E
+          command: |
+            mkdir -p /var/tmp/slow
+            set +o pipefail 2>/dev/null; echo "----" > /var/tmp/slow/heathotterviolet; seq 1 740718 >> /var/tmp/slow/heathotterviolet; echo "----" >> /var/tmp/slow/heathotterviolet; true
+            echo "verified: $(md5sum /var/tmp/slow/heathotterviolet | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'heathotterviolet'
+  perseus-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/heathotterviolet 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  gamma_prior:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Codename Dawn Comet
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; echo secret > "/dev/shm/middle-yearly.log" && shred -u "/dev/shm/middle-yearly.log" && ls "/dev/shm/middle-yearly.log" 2>/dev/null || echo shredded; true ; } > /var/tmp/slow/ae9587de643c545263324b976efd971b895e
+            echo "verified: $(md5sum /var/tmp/slow/ae9587de643c545263324b976efd971b895e | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'ae9587de643c545263324b976efd971b895e'
+  smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/ae9587de643c545263324b976efd971b895e 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  TOTAL_SCAN_RANK_BEAM_STRING:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Poster image synced at last
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; f=(thursday tuesday friday saturday monday); unset 'f[1]'; echo ${f[@]}; true ; } > /var/tmp/slow/render.glint
+            echo "verified: $(md5sum /var/tmp/slow/render.glint | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'render.glint'
+  sanity:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/9ab1f866a76 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  scaleAsync:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: The validation split warmed nightly
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; grep -i --only-matching --colour=auto users /etc/group | head -n 2; true ; } > /var/tmp/slow/879d441
+            echo "verified: $(md5sum /var/tmp/slow/879d441 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - '879d441'
+  HOOK_DEV:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/ae9587de643c545263324b976efd971b895e 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  m15c38:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pack pallets by noon
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; truncate -s 1M '/dev/shm/bo6.dat' && du -h --apparent-size '/dev/shm/bo6.dat'; true ; } > /var/tmp/slow/stone354
+            echo "verified: $(md5sum /var/tmp/slow/stone354 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'stone354'
+  tb-x:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/ae9587de643c545263324b976efd971b895e 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  deep_sage:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Block 32 roll forward
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; ls -A $HOME | sort | uniq -u | sort -u | tac | tr -s ' '; true ; } > /var/tmp/slow/iBK
+            echo "verified: $(md5sum /var/tmp/slow/iBK | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'iBK'
+  Launch_Staging4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/GLACIER_BOSON_HEATH_SOUTH 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  pNitro:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: DEFRAGMENT SLOW QUERY LOG COMPLETE
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; grep sh </etc/shells|head -n 15; true ; } > /var/tmp/slow/v7.12.31
+            echo "verified: $(md5sum /var/tmp/slow/v7.12.31 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'v7.12.31'
+  aug20-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/ae9587de643c545263324b976efd971b895e 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  ID-AVG-PTR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Now we verify the flaky tests
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; grep -wrhi if /etc/profile.d 2>/dev/null | cut -d: -f1 | sort -u; true ; } > /var/tmp/slow/J09
+            echo "verified: $(md5sum /var/tmp/slow/J09 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'J09'
+  delta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/GLACIER_BOSON_HEATH_SOUTH 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  maxCurveWh:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Tonight train the timesheets
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; ls -l -S /var/lib | wc -l; true ; } > /var/tmp/slow/ae9f7c0d
+            echo "verified: $(md5sum /var/tmp/slow/ae9f7c0d | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'ae9f7c0d'
+  prometheus-ng:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/ae9587de643c545263324b976efd971b895e 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  normalize_fork:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: resume v18
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; grep -iRh case /etc/default 2>/dev/null | sort | head -n 5; true ; } > /var/tmp/slow/f3uOtqOFP41
+            echo "verified: $(md5sum /var/tmp/slow/f3uOtqOFP41 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'f3uOtqOFP41'
+  xray-4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/ae9587de643c545263324b976efd971b895e 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  registry_nightly_s390x:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: GREEN PREP GATE
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; LOG='red green blue'; printf '%s\n' "${LOG%% *}"; true ; } > /var/tmp/slow/ravenflame
+            echo "verified: $(md5sum /var/tmp/slow/ravenflame | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'ravenflame'
+  add-session-leak:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/GLACIER_BOSON_HEATH_SOUTH 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Rehydrate tree
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  copyFileLink:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Checkpoint the data loader
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; echo horse cat lion owl zebra | xargs -n1; true ; } > /var/tmp/slow/e26de97f64f
+            echo "verified: $(md5sum /var/tmp/slow/e26de97f64f | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'e26de97f64f'
+  v2-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/ae9587de643c545263324b976efd971b895e 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  bus-546:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Snapshot cache E
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; echo "saved" | sha256sum | cut -c1-16; true ; } > /var/tmp/slow/139.15.72
+            echo "verified: $(md5sum /var/tmp/slow/139.15.72 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - '139.15.72'
+  xray-5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/GLACIER_BOSON_HEATH_SOUTH 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  Camera-Reader:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Culture assay plate and wait
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; echo 'name: demo'| gzip -c| wc -c; true ; } > /var/tmp/slow/p4ck3tv101e7
+            echo "verified: $(md5sum /var/tmp/slow/p4ck3tv101e7 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'p4ck3tv101e7'
+  java17-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/ae9587de643c545263324b976efd971b895e 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Prime workspace
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  o-item:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Check the profile tab is enabled
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; ls -ts -w 60 -I '*.d' ${HOME}/.profile | paste -sd ' '; true ; } > /var/tmp/slow/SKU80649
+            echo "verified: $(md5sum /var/tmp/slow/SKU80649 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'SKU80649'
+  canary-v7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/GLACIER_BOSON_HEATH_SOUTH 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack payload
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  skipEmailTaxAlias:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: S10 background check enrollment
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; ps aux|awk 'NR>1 {print $1}'|fmt -w 61; true ; } > /var/tmp/slow/GLACIER_BOSON_HEATH_SOUTH
+            echo "verified: $(md5sum /var/tmp/slow/GLACIER_BOSON_HEATH_SOUTH | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'GLACIER_BOSON_HEATH_SOUTH'
+  wip-webhook-crash:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/GLACIER_BOSON_HEATH_SOUTH 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore snapshot
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  blend-spring-cluster-lion:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: package version tag unit 10
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; df -P | sort --key=5 --numeric-sort | tail -n +2; true ; } > /var/tmp/slow/temp1842a53
+            echo "verified: $(md5sum /var/tmp/slow/temp1842a53 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'temp1842a53'
+  alpha-6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/ae9587de643c545263324b976efd971b895e 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  IDX-SECTION-2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Phase X learning rate resume
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; ls -i /usr/share/doc | shuf -n 2; true ; } > /var/tmp/slow/9ab1f866a76
+            echo "verified: $(md5sum /var/tmp/slow/9ab1f866a76 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - '9ab1f866a76'
+  cf-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/9ab1f866a76 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  scale_full_disable_pipe:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Masking depth 9
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; for val in {1..6};do printf '%d %d\n' ${val} $((val * 3)); done; true ; } > /var/tmp/slow/RUSTY_CLUSTER_NODE
+            echo "verified: $(md5sum /var/tmp/slow/RUSTY_CLUSTER_NODE | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'RUSTY_CLUSTER_NODE'
+  ruby3-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/GLACIER_BOSON_HEATH_SOUTH 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Seed workspace
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  WSIPRouter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: TICKET 91DE
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; ps -eo comm= |fmt -w 68 |expand -t 6; true ; } > /var/tmp/slow/HeathRasterClusterNickel
+            echo "verified: $(md5sum /var/tmp/slow/HeathRasterClusterNickel | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'HeathRasterClusterNickel'
+  jun23-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/HeathRasterClusterNickel 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack sources
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  span130:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: step four wind down the leases
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; cat /etc/skel/.profile | sort; true ; } > /var/tmp/slow/lynx-8317
+            echo "verified: $(md5sum /var/tmp/slow/lynx-8317 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'lynx-8317'
+  brodcast-4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/lynx-8317 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  Compare-VectorObject:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Attest the audit trail please
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; for val in grape orange lemon pear fig; do echo ${val} | rev; done | sort; true ; } > /var/tmp/slow/packet_meadow
+            echo "verified: $(md5sum /var/tmp/slow/packet_meadow | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'packet_meadow'
+  fix-6551:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/GLACIER_BOSON_HEATH_SOUTH 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  tiv5jsrw3c0s9gj:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: shift lead notification task
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; printf 'name,city,score\nvic,perth,49\ncarol,lima,64\nann,lisbon,60\nnina,helsinki,61\n' >"/var/tmp/daily.txt" && head -n 1 "/var/tmp/daily.txt" | tr , "\n"; true ; } > /var/tmp/slow/run-92t
+            echo "verified: $(md5sum /var/tmp/slow/run-92t | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'run-92t'
+  strated:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/GLACIER_BOSON_HEATH_SOUTH 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  WidgetMut:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: touch vids v
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; grep --color=always bash /etc/passwd | cut -d: -f1; true ; } > /var/tmp/slow/7itanc0pper
+            echo "verified: $(md5sum /var/tmp/slow/7itanc0pper | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - '7itanc0pper'
+  q1-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/9ab1f866a76 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  eps_eff:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Snapshot cache E
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; md5sum /etc/*.conf 2>/dev/null | sort | head -n 3; true ; } > /var/tmp/slow/PO_095039
+            echo "verified: $(md5sum /var/tmp/slow/PO_095039 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'PO_095039'
+  defualt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/9ab1f866a76 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  md5Pulse:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Batch the receivables fy25
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; grep -qs 'proc' /proc/mounts && echo found || echo 'not found'; true ; } > /var/tmp/slow/P_51800
+            echo "verified: $(md5sum /var/tmp/slow/P_51800 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'P_51800'
+  STAGE_LAB:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/P_51800 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  salt_:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: We usually inspect inventory now
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; if grep -q '^ID=' /etc/os-release;then echo 'yes'; else echo no; fi; true ; } > /var/tmp/slow/AssetVelvetNoise
+            echo "verified: $(md5sum /var/tmp/slow/AssetVelvetNoise | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'AssetVelvetNoise'
+  build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/ae9587de643c545263324b976efd971b895e 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  bravoNovember6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Hand the crafting recipes over to prod
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; echo -n 'the answer is 42' | od -c | head -n 2; true ; } > /var/tmp/slow/hawkl4y3r
+            echo "verified: $(md5sum /var/tmp/slow/hawkl4y3r | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'hawkl4y3r'
+  q3-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/9ab1f866a76 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  proFixtureEntry:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Centring of the user avatars
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; printf '%s\n' "snow expected tomorrow" | cut -c1-8; true ; } > /var/tmp/slow/fnv_29feb3e2213256
+            echo "verified: $(md5sum /var/tmp/slow/fnv_29feb3e2213256 | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'fnv_29feb3e2213256'
+  validte:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/9ab1f866a76 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+  virtualPtr:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Intro clip upscale for the big day
+          command: |
+            mkdir -p /var/tmp/slow
+            { set +o pipefail 2>/dev/null; (trap 'echo cleaning up' EXIT; echo 50/50); true ; } > /var/tmp/slow/cache-vector
+            echo "verified: $(md5sum /var/tmp/slow/cache-vector | cut -c1-10)"
+      - persist_to_workspace:
+          root: /var/tmp/slow
+          paths:
+            - 'cache-vector'
+  add-router-glitch:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/slow
+      - run:
+          name: Pre-verify C
+          command: |
+            cat /var/tmp/slow/ae9587de643c545263324b976efd971b895e 2>/dev/null | tee /dev/null | tee /dev/null | wc -c || true
+      - run:
+          name: Fetch HEAD
+          command: git clone --depth 1 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: xzcat pond-tmp.tar.xz | tar xf -
+      - run:
+          command: (./commit-proxy)
+
+workflows:
+  all:
+    jobs:
+      - WSIPRouter
+      - jun23-ship:
+          requires:
+            - WSIPRouter
+      - md5Pulse:
+          requires:
+            - WSIPRouter
+      - STAGE_LAB:
+          requires:
+            - md5Pulse
+      - v14x:
+          requires:
+            - md5Pulse
+      - perseus-v2:
+          requires:
+            - v14x
+      - span130:
+          requires:
+            - v14x
+      - brodcast-4:
+          requires:
+            - span130
+      - IDX-SECTION-2
+      - eps_eff
+      - TOTAL_SCAN_RANK_BEAM_STRING
+      - cf-v2:
+          requires:
+            - IDX-SECTION-2
+            - eps_eff
+            - TOTAL_SCAN_RANK_BEAM_STRING
+      - defualt:
+          requires:
+            - IDX-SECTION-2
+            - eps_eff
+            - TOTAL_SCAN_RANK_BEAM_STRING
+      - sanity:
+          requires:
+            - IDX-SECTION-2
+            - eps_eff
+            - TOTAL_SCAN_RANK_BEAM_STRING
+      - q1-cleanup:
+          requires:
+            - IDX-SECTION-2
+            - eps_eff
+            - TOTAL_SCAN_RANK_BEAM_STRING
+      - validte:
+          requires:
+            - IDX-SECTION-2
+            - eps_eff
+            - TOTAL_SCAN_RANK_BEAM_STRING
+      - q3-release:
+          requires:
+            - IDX-SECTION-2
+            - eps_eff
+            - TOTAL_SCAN_RANK_BEAM_STRING
+      - gamma_prior
+      - maxCurveWh
+      - normalize_fork
+      - smoke:
+          requires:
+            - gamma_prior
+            - maxCurveWh
+            - normalize_fork
+      - prometheus-ng:
+          requires:
+            - gamma_prior
+            - maxCurveWh
+            - normalize_fork
+      - xray-4:
+          requires:
+            - gamma_prior
+            - maxCurveWh
+            - normalize_fork
+      - add-router-glitch:
+          requires:
+            - gamma_prior
+            - maxCurveWh
+            - normalize_fork
+      - aug20-release:
+          requires:
+            - gamma_prior
+            - maxCurveWh
+            - normalize_fork
+      - java17-vet:
+          requires:
+            - gamma_prior
+            - maxCurveWh
+            - normalize_fork
+      - tb-x:
+          requires:
+            - gamma_prior
+            - maxCurveWh
+            - normalize_fork
+      - alpha-6:
+          requires:
+            - gamma_prior
+            - maxCurveWh
+            - normalize_fork
+      - build:
+          requires:
+            - gamma_prior
+            - maxCurveWh
+            - normalize_fork
+      - HOOK_DEV:
+          requires:
+            - gamma_prior
+            - maxCurveWh
+            - normalize_fork
+      - v2-beta:
+          requires:
+            - gamma_prior
+            - maxCurveWh
+            - normalize_fork
+      - skipEmailTaxAlias
+      - ID-AVG-PTR
+      - registry_nightly_s390x
+      - wip-webhook-crash:
+          requires:
+            - skipEmailTaxAlias
+            - ID-AVG-PTR
+            - registry_nightly_s390x
+      - delta:
+          requires:
+            - skipEmailTaxAlias
+            - ID-AVG-PTR
+            - registry_nightly_s390x
+      - add-session-leak:
+          requires:
+            - skipEmailTaxAlias
+            - ID-AVG-PTR
+            - registry_nightly_s390x
+      - strated:
+          requires:
+            - skipEmailTaxAlias
+            - ID-AVG-PTR
+            - registry_nightly_s390x
+      - canary-v7:
+          requires:
+            - skipEmailTaxAlias
+            - ID-AVG-PTR
+            - registry_nightly_s390x
+      - ruby3-vet:
+          requires:
+            - skipEmailTaxAlias
+            - ID-AVG-PTR
+            - registry_nightly_s390x
+      - xray-5:
+          requires:
+            - skipEmailTaxAlias
+            - ID-AVG-PTR
+            - registry_nightly_s390x
+      - fix-6551:
+          requires:
+            - skipEmailTaxAlias
+            - ID-AVG-PTR
+            - registry_nightly_s390x
+      - Launch_Staging4:
+          requires:
+            - skipEmailTaxAlias
+            - ID-AVG-PTR
+            - registry_nightly_s390x
